@@ -3,7 +3,7 @@ from rest_framework import serializers
 from room.models import Room
 
 
-class RoomListSerializer(ModelSerializer):
+class RoomSerializer(ModelSerializer):
     class Meta:
         model = Room
         fields = "__all__"
