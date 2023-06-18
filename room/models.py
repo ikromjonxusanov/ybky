@@ -7,6 +7,14 @@ class Room(models.Model):
         TEAM = 'team'
         CONFERENCE = 'conference'
 
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
     type = models.CharField(max_length=10, choices=TYPE.choices)
     capacity = models.PositiveIntegerField()
+
+
+class Book(models.Model):
+    resident = models.CharField(max_length=255)
+    start = models.DateTimeField()
+    end = models.DateTimeField()
+
+    room = models.ForeignKey('room.Room', null=True, on_delete=models.DO_NOTHING)
