@@ -11,6 +11,14 @@ from room.models import Room, Book
 
 
 class RoomListAPIView(generics.ListAPIView):
+    """
+    Mavjud xonalarni olish uchun API
+
+    search: Xona nomi orqali qidirish
+    type: xona turi bo'yicha saralash (focus, team, conference)
+    page: sahifa tartib raqami
+    page_size: sahifadagi maksimum natijalar soni
+    """
     serializer_class = RoomSerializer
     filter_backends = [DjangoFilterBackend, SearchFilter]
     filterset_fields = ['type']
@@ -19,11 +27,17 @@ class RoomListAPIView(generics.ListAPIView):
 
 
 class RoomRetrieveAPIView(generics.RetrieveAPIView):
+    """
+    Xonani id orqali olish uchun API
+    """
     serializer_class = RoomSerializer
     queryset = Room.objects.all()
 
 
 class BookCreateAPIView(generics.CreateAPIView):
+    """
+    Xonani band qilish uchun API
+    """
     serializer_class = BookSerializer
 
     def perform_create(self, serializer):
@@ -31,6 +45,10 @@ class BookCreateAPIView(generics.CreateAPIView):
 
 
 class AvailabilityAPIView(generics.RetrieveAPIView):
+    """
+    Xonaning bo'sh vaqtlarini olish uchun API
+    date: sana (ko'rsatilmasa bugungi sana olinadi)
+    """
     queryset = Room.objects.all()
 
     def get(self, request, *args, **kwargs):
