@@ -1,2 +1,2 @@
 # YBKY 
-<i>(Yozda bir kod yozamiz)</i> Loyihasini Backend test loyihasi
+<i>(Yozda bir kod yozamiz)</i> Loyihasini Backend test qismi
