@@ -32,8 +32,10 @@ class BookSerializer(serializers.ModelSerializer):
         end = attrs.get('end')
 
         availabilities = [
-            {'start': now.replace(hour=9), 'end': now.replace(hour=11)},
-            {'start': now.replace(hour=13), 'end': now.replace(hour=18)}
+            {
+                'start': start.replace(hour=9, minute=0, second=0, microsecond=0),
+                'end': start.replace(hour=18, minute=0, second=0, microsecond=0)
+            }
         ]
 
         if now > start or now > end or end < start:
