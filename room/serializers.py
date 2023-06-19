@@ -61,3 +61,8 @@ class BookSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         resident = validated_data.pop('resident').get('name')
         return super().create({**validated_data, 'resident': resident})
+
+
+class AvailabilitiesListSerializer(serializers.Serializer):
+    start = serializers.DateTimeField()
+    end = serializers.DateTimeField()
