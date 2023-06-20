@@ -31,26 +31,21 @@ class BookSerializer(serializers.ModelSerializer):
         start = attrs.get('start')
         end = attrs.get('end')
 
-        availabilities = [
-            {
-                'start': start.replace(hour=9, minute=0, second=0, microsecond=0),
-                'end': start.replace(hour=18, minute=0, second=0, microsecond=0)
-            }
-        ]
+        availability = {
+            'start': start.replace(hour=9, minute=0, second=0, microsecond=0),
+            'end': start.replace(hour=18, minute=0, second=0, microsecond=0)
+        }
 
         if now > start or now > end or end < start:
             raise serializers.ValidationError({"error": "Iltimos to'g'ri vatq kiriting"})
 
-        for availability in availabilities:
-            if availability['start'] <= start <= availability['end'] and \
-                    availability['start'] <= end <= availability['end']:
-                break
-        else:
+        if not (availability['start'] <= start <= availability['end'] and
+                availability['start'] <= end <= availability['end']):
             raise serializers.ValidationError({"error": "Iltimos to'g'ri vatq kiriting"})
 
         if Book.objects.filter(
                 room_id=room_id,
-                start__range=[start, end]
+                start__range=[start, end-datetime.timedelta(minutes=1)]
         ).exists():
             raise serializers.ValidationError(
                 {"error": "uzr, siz tanlagan vaqtda xona band"},
