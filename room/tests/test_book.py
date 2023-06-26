@@ -13,8 +13,8 @@ class BookCreateAPIViewTest(APITestCase):
     def test_create_book(self):
         url = reverse('book-create', kwargs={'pk': 1})
         data = {
-            'start': '2023-07-30T09:00:00',
-            'end': '2023-07-30T10:00:00',
+            'start': '30-07-2023 09:00:00',
+            'end': '30-07-2023 10:00:00',
             'resident': {
                 'name': 'Ikromjon Xusanov'
             }
@@ -31,8 +31,8 @@ class BookCreateAPIViewTest(APITestCase):
     def test_create_book_with_invalid_data(self):
         url = reverse('book-create', kwargs={'pk': 1})
         data = {
-            'start': '2023-07-30T09:00:00',
-            'end': '2023-07-30T08:00:00',  # Invalid end time
+            'start': '30-07-2023 09:00:00',
+            'end': '30-07-2023 08:00:00',  # Invalid end time
             'resident': {
                 'name': 'Ikromjon Xusanov'
             }
