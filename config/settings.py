@@ -9,7 +9,7 @@ sys.path.append(os.path.join(BASE_DIR, 'apps'))
 SECRET_KEY = 'django-insecure-eag#zd^^w$$^^mcecofg$buh1&(ier0!yxxn2*q$g=0+2_+3rd'
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -33,6 +33,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'config.middleware.SuccessCreatedMiddleware'
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -93,7 +94,9 @@ REST_FRAMEWORK = {
         'rest_framework.filters.SearchFilter'
     ],
     'DEFAULT_PAGINATION_CLASS': 'config.paginations.PageNumberPagination',
+    'EXCEPTION_HANDLER': 'config.exceptions.handler',
     'PAGE_SIZE': 10,
+    "DATE_INPUT_FORMATS": ["%d-%m-%Y %H:%M:%S"],
 }
 
 LANGUAGE_CODE = 'uz-uz'
